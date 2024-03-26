@@ -78,7 +78,7 @@ const CartPage: React.FC = () => {
         const updatedCartItems = cartItems.filter((item, index) => index !== indexToRemove);
         setCartItems(updatedCartItems);
         Cookies.set('cartitems', JSON.stringify(updatedCartItems));
-        // Also update the cookie or session storage with the new cartItems if necessary
+      
     };
 
     const makePayment = async () => {
