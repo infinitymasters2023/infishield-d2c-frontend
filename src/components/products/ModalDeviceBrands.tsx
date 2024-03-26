@@ -150,7 +150,6 @@ const ModalDeviceBrands = ({ showModal, toggleModal, productId }: { showModal: b
                                                     <label className="">
                                                         <input type="radio" name="radio" />
                                                         <span className="radio-btn">
-                                                            <i className="las la-check" />
                                                             <div className="brand-icon">
                                                                 <img src={brandsample.src} alt={brand.Brand} />
                                                                 <h3>{brand.Brand}</h3>

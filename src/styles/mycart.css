@@ -511,6 +511,98 @@
   color: rgba(53, 53, 53, 0.8196078431);
 }
 
+/* select Category modal */
+
+#selectCat .modal-dialog {
+  margin: 0;
+}
+
+
+
+#selectCat .cate-container {
+  display: flex;
+  /* align-items: center;
+  justify-content: center;
+  flex-direction: column; */
+}
+
+#selectCat .cate-container h2 {
+  margin: 0 0 16px 0;
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#selectCat .radio-buttons {
+  width: 100%;
+  /* flex: 0 0; */
+  /* margin: 0 auto; */
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+}
+
+#selectCat a.custom-radio {
+  flex: 0 0 47.99%;
+  display: flex;
+  justify-content: center;
+  margin-block: 5px;
+}
+
+#selectCat .custom-radio label {
+  width: 100%;
+  border: 1px solid #cecece6b;
+}
+
+#selectCat .custom-radio input {
+  display: none;
+}
+
+#selectCat .radio-btn {
+  margin: 5px;
+  width: 100%;
+  height: 60px;
+  /* border: 3px solid rgb(0 0 0 / 0%); */
+  display: flex;
+  border-radius: 2px;
+  position: relative;
+  text-align: center;
+  /* box-shadow: 0 0 20px rgba(195, 195, 195, 0.4039215686); */
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+}
+
+#selectCat .radio-btn .cate-icon {
+  width: 100%;
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+}
+
+#selectCat .radio-btn .cate-icon img {
+  display: block;
+  width: 46px;
+  margin-bottom: 0;
+}
+
+#selectCat .radio-btn .cate-icon h3 {
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0;
+  margin-left: 0.5rem;
+  text-align: start;
+}
+
+#selectCat .custom-radio input:checked+.radio-btn {
+  border: 2px solid #1581cd;
+}
+
 /* reponsive css*/
 /* 
     320px — 480px: Mobile devices
@@ -769,6 +861,30 @@
   .cartAddress .addCard {
     flex: 0 0 100%;
   }
+
+  /* select Category modal */
+
+  #selectCat .radio-buttons {
+    width: 100%;
+    /* flex: 0 0; */
+    /* margin: 0 auto; */
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+  }
+
+  #selectCat a.custom-radio {
+    flex: 0 0 99.99%;
+  }
+
+  #selectCat .radio-btn .cate-icon h3 {
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
 }
 
 @media (min-width: 376px) and (max-width: 480px) {
@@ -1025,6 +1141,30 @@
   .cartAddress .addCard {
     flex: 0 0 100%;
   }
+
+  /* select Category modal */
+  #selectCat .radio-buttons {
+    width: 100%;
+    /* flex: 0 0; */
+    /* margin: 0 auto; */
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+  }
+
+  #selectCat a.custom-radio {
+    flex: 0 0 99.99%;
+  }
+
+  #selectCat .radio-btn .cate-icon h3 {
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+
 }
 
 /* 

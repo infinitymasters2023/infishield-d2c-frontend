@@ -87,7 +87,7 @@ const DeviceCategoryModal = ({ showModal, toggleModal }: { showModal: boolean, t
                 toggleModal();
             }}
             className="modal fade"
-            id="selectBrands"
+            id="selectCat"
             data-bs-backdrop="static"
             data-bs-keyboard="false"
             tabIndex={-1}
@@ -111,30 +111,27 @@ const DeviceCategoryModal = ({ showModal, toggleModal }: { showModal: boolean, t
                         <div className="cate-container">
                             {/* <h2>Search your brand if not visible here</h2> */}
                             <div className="radio-buttons">
-                                <label className="custom-radio">
-                                    <input type="radio" name="radio" defaultChecked />
 
                                     {categories.map((category) => {
                                         return (
-                                            <span key={category.id} className="radio-buttons">
-                                                <Link href={`/productlist?subcategoryid=${category.subcategoryid}`} className="dropdown-item-links">
-                                                    <span className="cate-icon">
+                                        <Link href={`/productlist?subcategoryid=${category.subcategoryid}`} className="custom-radio">
+                                            <label key={category.id} >
+                                            <input type="radio" name="radio" />
+                                                    <span className="radio-btn">
+                                                        <div className="cate-icon">
                                                         <img
                                                             src={getCategoryImage(category.subcategoryid)}
                                                             width={48}
-                                                            height={48}
+                                                            height={48} 
                                                             alt={category.subcategoryname}
                                                         />
-                                                    </span>
-                                                    <div className="navText">
                                                         <h3>{category.subcategoryname}</h3>
-                                                        <span>{category.subcategoryname}</span>
-                                                    </div>
-                                                </Link>
-                                            </span>
+                                                        </div>
+                                                    </span>
+                                            </label>
+                                        </Link>
                                         );
                                     })}
-                                </label>
                             </div>
                         </div>
                     </div>
