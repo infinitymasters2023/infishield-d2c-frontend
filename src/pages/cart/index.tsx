@@ -553,7 +553,8 @@ const CartPage: React.FC = () => {
                                                 type="button"
                                                 onClick={makePayment}
                                             >
-                                                  <img src={razorpay.src}
+
+                                            <img src={razorpay.src}
                                             width={50}
                                             height={30}
                                             alt="Proceed to payment" />
@@ -565,7 +566,8 @@ const CartPage: React.FC = () => {
                                                 type="button"
                                                 onClick={makePaytmPayment}
                                             >
-                                                  <img src={paytm.src}
+
+                                                <img src={paytm.src}
                                                 width={100}
                                                 height={30}
                                                 alt=" Pay with Paytm" />
