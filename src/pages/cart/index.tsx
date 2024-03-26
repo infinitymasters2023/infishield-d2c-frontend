@@ -134,10 +134,10 @@ const CartPage: React.FC = () => {
                 mid: mid,
                 websiteName: 'InfinAWEB',
                 orderId: orderId,
-                callbackUrl: `${process.env.APP_URL}/api/payment`,
+                callbackUrl: `${process.env.APP_URL}/api/paytm`,
                 txnAmount: {
 
-                    value: totalSum,
+                    value: 1.00,
                     currency: 'INR',
                 },
                 userInfo: {
@@ -194,10 +194,10 @@ const CartPage: React.FC = () => {
                 console.error('Error:', error);
             }
         };
-    }, []);
+    }, [totalSum]);
     useEffect(() => {
         initializePayment();
-    }, []);
+    }, [totalSum]);
     // InfinA73791511910258
     const makePaytmPayment = async () => {
         const mid = 'InfinA73791511910258'; // Define mid here or get it from somewhere else
