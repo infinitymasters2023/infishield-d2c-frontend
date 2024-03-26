@@ -41,7 +41,7 @@ interface PaytmConfig {
       notifyMerchant: (eventName: string, data: Record<string, any>) => void;
   };
 }
-function Index() {
+function Paytmgateway() {
   const [loading, setLoading] = useState(false);
   const [payTMData, setPayTM] = useState<PayTMRequestInterface>({
     token: '',
@@ -196,4 +196,4 @@ const makePaytmPayment = async () => {
   );
 }
 
-export default Index;
+export default Paytmgateway;

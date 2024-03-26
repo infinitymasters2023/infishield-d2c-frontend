@@ -11,20 +11,62 @@ import DeviceCategoryModal from "@/components/products/DeviceCategoryModal";
 import PaytmChecksum from "@/helpers/paytm/PaytmChecksum";
 import Script from "next/script";
 import logo from '../../assets/img/logo/logo1.png'
-
+import paytm from '../../assets/img/payment/paytm.svg'
+import razorpay from '../../assets/img/payment/razorpay-icon.svg'
 declare global {
     interface Window {
         Razorpay: any;
     }
+}
+const dotenv = require('dotenv');
+dotenv.config();
+const https = require('https');
+
+interface PayTMRequestInterface {
+    token: string;
+    order: string;
+    mid: string;
+}
+interface PaytmConfig {
+    root: string;
+    data: {
+        orderId: string;
+        token: string;
+        tokenType: string;
+        amount: number;
+        mid: string;
+    };
+    payMode: {
+        labels: Record<string, any>;
+        filter: {
+            exclude: string[];
+        };
+        order: string[];
+    };
+    website: string;
+    flow: string;
+    merchant: {
+        mid: string;
+        redirect: boolean;
+    };
+    handler: {
+        transactionStatus: (paymentStatus: Record<string, any>) => void;
+        notifyMerchant: (eventName: string, data: Record<string, any>) => void;
+    };
 }
 const CartPage: React.FC = () => {
     const router = useRouter();
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [subcategoryid, setSubcategoryId] = useState("");
     const [showModal, setShowModal] = useState(false);
-    const [showPayment, setShowPayment] = useState(false);
+    const [showPaymentButtons, setShowPaymentButtons] = useState(false);
     const [isTermsAccepted, setIsTermsAccepted] = useState(false);
     const [isManufacturerWarrantyAccepted, setIsManufacturerWarrantyAccepted] = useState(false);
+    const [payTMData, setPayTM] = useState<PayTMRequestInterface>({
+        token: '',
+        order: '',
+        mid: 'InfinA73791511910258'
+    });
 
     useEffect(() => {
 
@@ -78,8 +120,139 @@ const CartPage: React.FC = () => {
         const updatedCartItems = cartItems.filter((item, index) => index !== indexToRemove);
         setCartItems(updatedCartItems);
         Cookies.set('cartitems', JSON.stringify(updatedCartItems));
-      
+
     };
+
+    const initializePayment = useMemo(() => {
+        return async () => {
+            const orderId = 'Order_' + new Date().getTime();
+            sessionStorage.setItem('orderId', JSON.stringify(orderId));
+            const mid = 'InfinA73791511910258';
+            const mkey = 'Xv#3x9vZ%cawdcD1';
+            const paytmBody = {
+                requestType: 'Payment',
+                mid: mid,
+                websiteName: 'InfinAWEB',
+                orderId: orderId,
+                callbackUrl: `${process.env.APP_URL}/api/payment`,
+                txnAmount: {
+
+                    value: totalSum,
+                    currency: 'INR',
+                },
+                userInfo: {
+                    custId: '250',
+                },
+            };
+
+            try {
+                const checksum = await PaytmChecksum.generateSignature(
+                    JSON.stringify(paytmBody),
+                    mkey
+                );
+                const paytmParams = {
+                    body: paytmBody,
+                    head: {
+                        signature: checksum,
+                    }
+                };
+                const post_data = JSON.stringify(paytmParams);
+                const options = {
+                    hostname: 'securegw.paytm.in',
+                    port: 443,
+                    path: `/theia/api/v1/initiateTransaction?mid=${mid}&orderId=${orderId}`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Content-Length': post_data.length,
+                    },
+                };
+
+                var response = "";
+                var post_req = https.request(options, function (post_res: any) {
+                    post_res.on('data', function (chunk: any) {
+                        response += chunk;
+                    });
+
+                    post_res.on('end', function () {
+                        const responseBody = JSON.parse(response);
+                        if (responseBody.body && responseBody.body.txnToken) {
+                            const { txnToken } = responseBody.body;
+                            setPayTM({
+                                ...payTMData,
+                                token: txnToken,
+                                order: orderId,
+                                mid: mid,
+                            });
+                        }
+                    });
+                });
+
+                post_req.write(post_data);
+                post_req.end();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+    }, []);
+    useEffect(() => {
+        initializePayment();
+    }, []);
+    // InfinA73791511910258
+    const makePaytmPayment = async () => {
+        const mid = 'InfinA73791511910258'; // Define mid here or get it from somewhere else
+
+
+        const config = {
+            root: '',
+            data: {
+                orderId: payTMData.order,
+                token: payTMData.token,
+                tokenType: 'TXN_TOKEN',
+                amount: totalSum,
+                mid: ''
+            },
+            payMode: {
+                labels: {},
+                filter: {
+                    exclude: [],
+                },
+                order: ['CC', 'DC', 'NB', 'UPI', 'PPBL', 'PPI', 'BALANCE'],
+            },
+            website: 'WEBSTAGING',
+            flow: 'DEFAULT',
+            merchant: {
+                mid: mid,
+                redirect: true,
+            },
+            handler: {
+                transactionStatus: function (paymentStatus: any) {
+                    // Handle transaction status
+                    console.log('Transaction status:', paymentStatus);
+                    // Add your implementation here to handle transaction status
+                },
+                notifyMerchant: function (eventName: any, data: any) {
+                    // Handle payment notification event
+                    console.log('Received payment notification:', eventName, data);
+                    // Add your implementation here to handle payment notification event
+                }
+            }
+        };
+
+        if (typeof window !== 'undefined' && (window as any).Paytm && (window as any).Paytm.CheckoutJS) {
+            (window as any).Paytm.CheckoutJS.init(config)
+                .then(() => {
+                    (window as any).Paytm.CheckoutJS.invoke();
+                })
+                .catch((error: any) => {
+                    console.log('Error => ', error);
+                });
+        } else {
+            console.error('Paytm or CheckoutJS not available in the window object.');
+        }
+    }
+
+    /*razorpay*/
 
     const makePayment = async () => {
         const initializeRazorpay = () => {
@@ -114,7 +287,7 @@ const CartPage: React.FC = () => {
             amount: data.totalSum,
             order_id: data.id,
             description: "Thank you for your purchase",
-            image: logo.src, 
+            image: logo.src,
             handler: function (response: { razorpay_payment_id: string; }) {
                 alert("Razorpay Response: " + response.razorpay_payment_id);
             },
@@ -124,7 +297,7 @@ const CartPage: React.FC = () => {
                 contact: '9582293150'
             }
         };
-        
+
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
@@ -139,6 +312,11 @@ const CartPage: React.FC = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+    const handleProceedToPayment = () => {
+        if (isTermsAccepted && isManufacturerWarrantyAccepted) {
+            setShowPaymentButtons(true);
+        }
+    };
     return (
         <Layout>
             <Script
@@ -151,58 +329,58 @@ const CartPage: React.FC = () => {
             <section className="pageMainContent">
                 <div className="container g-0">
                     <div className="row g-0">
-                    <div className="pageHead-Outer">
-                        <div className="outerHero">
-                        <div className="row g-0">
-                            {/* Breadcrumb start */}
-                            <nav aria-label="breadcrumb" className="g-0">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item">
-                                <Link href="/">Home</Link>
-                                </li>
-                                <li className="breadcrumb-item active" aria-current="page">
-                                My Cart
-                                </li>
-                            </ol>
-                            </nav>
-                            {/* Breadcrumb ends */}
-                            {/* banner start */}
-                            <div className="OuterBanner">
-                            {/* left */}
-                            <div className="OuterBanner--left">
-                                <div className="left_content">
-                                <h2>InfyShield</h2>
-                                <h1 className="display-3">Your Cart</h1>
-                                <p>
-                                A complete mobile protection plan covering
-                                additional warranty, damage protection and assured
-                                buyback
-                                </p>
+                        <div className="pageHead-Outer">
+                            <div className="outerHero">
+                                <div className="row g-0">
+                                    {/* Breadcrumb start */}
+                                    <nav aria-label="breadcrumb" className="g-0">
+                                        <ol className="breadcrumb">
+                                            <li className="breadcrumb-item">
+                                                <Link href="/">Home</Link>
+                                            </li>
+                                            <li className="breadcrumb-item active" aria-current="page">
+                                                My Cart
+                                            </li>
+                                        </ol>
+                                    </nav>
+                                    {/* Breadcrumb ends */}
+                                    {/* banner start */}
+                                    <div className="OuterBanner">
+                                        {/* left */}
+                                        <div className="OuterBanner--left">
+                                            <div className="left_content">
+                                                <h2>InfyShield</h2>
+                                                <h1 className="display-3">Your Cart</h1>
+                                                <p>
+                                                    A complete mobile protection plan covering
+                                                    additional warranty, damage protection and assured
+                                                    buyback
+                                                </p>
+                                            </div>
+                                            <div className="left_action d-none">
+                                                <a href="#dwFormBox" className="ActionBtn">
+                                                    {" "}
+                                                    Get Now
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {/* right */}
+                                        <div className="OuterBanner--right d-none">
+                                            <figure className="figure">
+                                                <img
+                                                    src="assets/img/heroBanner/iPhone-X 1.png"
+                                                    className="figure-img img-fluid"
+                                                    width={200}
+                                                    height={398}
+                                                    alt="banner right"
+                                                />
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    {/* banner ends */}
                                 </div>
-                                <div className="left_action d-none">
-                                <a href="#dwFormBox" className="ActionBtn">
-                                    {" "}
-                                    Get Now
-                                </a>
-                                </div>
                             </div>
-                            {/* right */}
-                            <div className="OuterBanner--right d-none">
-                                <figure className="figure">
-                                <img
-                                    src="assets/img/heroBanner/iPhone-X 1.png"
-                                    className="figure-img img-fluid"
-                                    width={200}
-                                    height={398}
-                                    alt="banner right"
-                                />
-                                </figure>
-                            </div>
-                            </div>
-                            {/* banner ends */}
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </section>
@@ -332,7 +510,7 @@ const CartPage: React.FC = () => {
                                                     className="form-check-input"
                                                     type="checkbox"
                                                     id="termsCondition1"
-                                                    
+
                                                     checked={isManufacturerWarrantyAccepted}
                                                     onChange={handleManufacturerWarrantyCheckboxChange}
                                                 />
@@ -348,7 +526,7 @@ const CartPage: React.FC = () => {
                                                     className="form-check-input"
                                                     type="checkbox"
                                                     id="termsCondition2"
-                                                    
+
                                                     checked={isTermsAccepted}
                                                     onChange={handleTermsCheckboxChange}
                                                 />
@@ -356,14 +534,45 @@ const CartPage: React.FC = () => {
                                         </form>
                                     </div>
                                 </div>
-
                                 <div className="summary--Footer">
-                                    <button className="ptpBtn" type="button"
-                                     onClick={() => makePayment()}
-                                     disabled={!isTermsAccepted || !isManufacturerWarrantyAccepted}
-                                     >
-                                        Proceed to payment
+                                    {!showPaymentButtons && (
+                                        <button
+                                            className="ptpBtn"
+                                            type="button"
+                                            disabled={!isTermsAccepted || !isManufacturerWarrantyAccepted}
+                                            onClick={handleProceedToPayment}
+                                        >
+                                            Proceed to payment
                                         </button>
+                                    )}
+
+                                    {showPaymentButtons && (
+                                        <>
+                                            <button
+                                                className=""
+                                                type="button"
+                                                onClick={makePayment}
+                                            >
+                                                  <img src={razorpay.src}
+                                            width={50}
+                                            height={30}
+                                            alt="Proceed to payment" />
+                                    
+                                            </button>
+
+                                            <button
+                                                className="float-end"
+                                                type="button"
+                                                onClick={makePaytmPayment}
+                                            >
+                                                  <img src={paytm.src}
+                                                width={100}
+                                                height={30}
+                                                alt=" Pay with Paytm" />
+                                                
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
 
 
