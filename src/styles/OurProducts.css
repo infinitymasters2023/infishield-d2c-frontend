@@ -731,8 +731,9 @@
 
   #selectBrands .radio-btn {
     margin: 5px;
-    width: 100%;
-    height: 80.66px;
+    padding: 5px 0;
+    width: 78.66px;
+    height: 86.66px;
     border: 3px solid transparent;
   }
 
@@ -805,9 +806,9 @@
   #selectBrands .searchbar-input {
     margin: 0;
     padding: 0;
-    margin-top: -37px;
+    margin-top: -30px;
     height: 34px;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
   }
 
@@ -1024,7 +1025,130 @@
     margin-bottom: 24px;
   }
 
+  /* select brnd modal  */
+  #selectBrands .modal-header {
+    padding: 10px;
+  }
 
+  #selectBrands .modal-title {
+    font-size: 14px;
+  }
+
+  #selectBrands .main-container {
+    padding: 0;
+  }
+
+  #selectBrands .main-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  #selectBrands .radio-buttons {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #selectBrands a.custom-radio {
+    flex: 0 0 33.33%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #selectBrands .radio-btn {
+    margin: 5px;
+    width: 86.66px;
+    height: 86.66px;
+    border: 3px solid transparent;
+    padding: 5px 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+  }
+
+  #selectBrands .radio-btn .brand-icon img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon i {
+    line-height: 80px;
+    font-size: 60px;
+  }
+
+  #selectBrands .radio-btn .brand-icon h3 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  #selectBrands .custom-radio input:checked+.radio-btn {
+    border: 2px solid #1581cd;
+  }
+
+  #selectBrands .searchbar {
+    font-size: 14px;
+    height: 44px;
+    border-radius: 24px;
+    margin: 0 auto;
+    max-width: 270px;
+    margin-bottom: 5px;
+  }
+
+  #selectBrands .searchbar-wrapper {
+    padding: 5px 8px 0 14px;
+  }
+
+  #selectBrands .searchbar-left {
+    font-size: 14px;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+
+  #selectBrands .search-icon-wrapper {
+    margin: auto;
+  }
+
+  #selectBrands .search-icon {
+    margin-top: 3px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+
+  #selectBrands .searchbar-icon {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+  }
+
+  #selectBrands .searchbar-input-spacer {
+    height: 34px;
+    font-size: 16px;
+  }
+
+  #selectBrands .searchbar-input {
+    margin: 0;
+    padding: 0;
+    margin-top: -30px;
+    height: 34px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #selectBrands .searchbar-right {
+    margin-top: -5px;
+  }
+
+  #selectBrands .searchbar-clear-icon {
+    margin-right: 12px;
+  }
+
+  #selectBrands .voice-search {
+    padding: 0 8px;
+    width: 2.3em;
+  }
 
 }
 
@@ -1260,8 +1384,9 @@
 
   #selectBrands .radio-btn {
     margin: 5px;
-    width: 100%;
-    border: 3px solid transparent;
+    padding: 5px 0;
+    width: 94px;
+    height: 94px;
   }
 
   #selectBrands .radio-btn .brand-icon {
@@ -1331,9 +1456,9 @@
   #selectBrands .searchbar-input {
     margin: 0;
     padding: 0;
-    margin-top: -37px;
+    margin-top: -30px;
     height: 34px;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
   }
 
@@ -1581,8 +1706,656 @@
 
   #selectBrands .radio-btn {
     margin: 5px;
-    width: 100%;
+    width: 100px;
+    height: 100px;
     border: 3px solid transparent;
+    padding: 5px 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon {
+    position: absolute;
+    width: 65px;
+    height: auto;
+  }
+
+  #selectBrands .radio-btn .brand-icon img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon i {
+    line-height: 80px;
+    font-size: 60px;
+  }
+
+  #selectBrands .radio-btn .brand-icon h3 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  #selectBrands .custom-radio input:checked+.radio-btn {
+    border: 2px solid #1581cd;
+  }
+
+  #selectBrands .searchbar {
+    font-size: 14px;
+    height: 44px;
+    border-radius: 24px;
+    margin: 0 auto;
+    max-width: 270px;
+    margin-bottom: 5px;
+  }
+
+  #selectBrands .searchbar-wrapper {
+    padding: 5px 8px 0 14px;
+  }
+
+  #selectBrands .searchbar-left {
+    font-size: 14px;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+
+  #selectBrands .search-icon-wrapper {
+    margin: auto;
+  }
+
+  #selectBrands .search-icon {
+    margin-top: 3px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+
+  #selectBrands .searchbar-icon {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+  }
+
+  #selectBrands .searchbar-input-spacer {
+    height: 34px;
+    font-size: 16px;
+  }
+
+  #selectBrands .searchbar-input {
+    margin: 0;
+    padding: 0;
+    margin-top: -30px;
+    height: 34px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #selectBrands .searchbar-right {
+    margin-top: -5px;
+  }
+
+  #selectBrands .searchbar-clear-icon {
+    margin-right: 12px;
+  }
+
+  #selectBrands .voice-search {
+    padding: 0 8px;
+    width: 2.3em;
+  }
+}
+
+
+
+@media (min-width: 961px) and (max-width: 1024px) {
+
+  #selectBrands .modal-header {
+    padding: 10px;
+  }
+
+  #selectBrands .modal-title {
+    font-size: 14px;
+  }
+
+  #selectBrands .main-container {
+    padding: 0;
+  }
+
+  #selectBrands .main-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  #selectBrands .radio-buttons {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #selectBrands a.custom-radio {
+    flex: 0 0 33.33%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #selectBrands .radio-btn {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    padding: 5px 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon {
+    position: absolute;
+    width: 65px;
+    height: auto;
+  }
+
+  #selectBrands .radio-btn .brand-icon img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon i {
+    line-height: 80px;
+    font-size: 60px;
+  }
+
+  #selectBrands .radio-btn .brand-icon h3 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  #selectBrands .custom-radio input:checked+.radio-btn {
+    border: 2px solid #1581cd;
+  }
+
+  #selectBrands .searchbar {
+    font-size: 14px;
+    height: 44px;
+    border-radius: 24px;
+    margin: 0 auto;
+    max-width: 270px;
+    margin-bottom: 5px;
+  }
+
+  #selectBrands .searchbar-wrapper {
+    padding: 5px 8px 0 14px;
+  }
+
+  #selectBrands .searchbar-left {
+    font-size: 14px;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+
+  #selectBrands .search-icon-wrapper {
+    margin: auto;
+  }
+
+  #selectBrands .search-icon {
+    margin-top: 3px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+
+  #selectBrands .searchbar-icon {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+  }
+
+  #selectBrands .searchbar-input-spacer {
+    height: 34px;
+    font-size: 16px;
+  }
+
+  #selectBrands .searchbar-input {
+    margin: 0;
+    padding: 0;
+    margin-top: -30px;
+    height: 34px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #selectBrands .searchbar-right {
+    margin-top: -5px;
+  }
+
+  #selectBrands .searchbar-clear-icon {
+    margin-right: 12px;
+  }
+
+  #selectBrands .voice-search {
+    padding: 0 8px;
+    width: 2.3em;
+  }
+
+}
+
+
+/* 
+    1025px — 1200px: Desktops, large screens
+*/
+@media (min-width: 1025px) and (max-width: 1200px) {
+
+  #selectBrands .modal-header {
+    padding: 10px;
+  }
+
+  #selectBrands .modal-title {
+    font-size: 14px;
+  }
+
+  #selectBrands .main-container {
+    padding: 0;
+  }
+
+  #selectBrands .main-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  #selectBrands .radio-buttons {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #selectBrands a.custom-radio {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #selectBrands .radio-btn {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    padding: 5px 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon {
+    position: absolute;
+    width: 65px;
+    height: auto;
+  }
+
+  #selectBrands .radio-btn .brand-icon img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon i {
+    line-height: 80px;
+    font-size: 60px;
+  }
+
+  #selectBrands .radio-btn .brand-icon h3 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  #selectBrands .custom-radio input:checked+.radio-btn {
+    border: 2px solid #1581cd;
+  }
+
+  #selectBrands .searchbar {
+    font-size: 14px;
+    height: 44px;
+    border-radius: 24px;
+    margin: 0 auto;
+    max-width: 270px;
+    margin-bottom: 5px;
+  }
+
+  #selectBrands .searchbar-wrapper {
+    padding: 5px 8px 0 14px;
+  }
+
+  #selectBrands .searchbar-left {
+    font-size: 14px;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+
+  #selectBrands .search-icon-wrapper {
+    margin: auto;
+  }
+
+  #selectBrands .search-icon {
+    margin-top: 3px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+
+  #selectBrands .searchbar-icon {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+  }
+
+  #selectBrands .searchbar-input-spacer {
+    height: 34px;
+    font-size: 16px;
+  }
+
+  #selectBrands .searchbar-input {
+    margin: 0;
+    padding: 0;
+    margin-top: -30px;
+    height: 34px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #selectBrands .searchbar-right {
+    margin-top: -5px;
+  }
+
+  #selectBrands .searchbar-clear-icon {
+    margin-right: 12px;
+  }
+
+  #selectBrands .voice-search {
+    padding: 0 8px;
+    width: 2.3em;
+  }
+
+}
+
+/* 
+    1201px and more —  Extra large screens, TV
+*/
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #selectBrands .modal-header {
+    padding: 10px;
+  }
+
+  #selectBrands .modal-title {
+    font-size: 14px;
+  }
+
+  #selectBrands .main-container {
+    padding: 0;
+  }
+
+  #selectBrands .main-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  #selectBrands .radio-buttons {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #selectBrands a.custom-radio {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #selectBrands .radio-btn {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    padding: 5px 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon {
+    position: absolute;
+    width: 65px;
+    height: auto;
+  }
+
+  #selectBrands .radio-btn .brand-icon img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon i {
+    line-height: 80px;
+    font-size: 60px;
+  }
+
+  #selectBrands .radio-btn .brand-icon h3 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  #selectBrands .custom-radio input:checked+.radio-btn {
+    border: 2px solid #1581cd;
+  }
+
+  #selectBrands .searchbar {
+    font-size: 14px;
+    height: 44px;
+    border-radius: 24px;
+    margin: 0 auto;
+    max-width: 270px;
+    margin-bottom: 5px;
+  }
+
+  #selectBrands .searchbar-wrapper {
+    padding: 5px 8px 0 14px;
+  }
+
+  #selectBrands .searchbar-left {
+    font-size: 14px;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+
+  #selectBrands .search-icon-wrapper {
+    margin: auto;
+  }
+
+  #selectBrands .search-icon {
+    margin-top: 3px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+
+  #selectBrands .searchbar-icon {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+  }
+
+  #selectBrands .searchbar-input-spacer {
+    height: 34px;
+    font-size: 16px;
+  }
+
+  #selectBrands .searchbar-input {
+    margin: 0;
+    padding: 0;
+    margin-top: -30px;
+    height: 34px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #selectBrands .searchbar-right {
+    margin-top: -5px;
+  }
+
+  #selectBrands .searchbar-clear-icon {
+    margin-right: 12px;
+  }
+
+  #selectBrands .voice-search {
+    padding: 0 8px;
+    width: 2.3em;
+  }
+}
+
+/*  
+    1201px and more —  Extra large screens, TV
+*/
+@media (min-width: 1441px) and (max-width: 1680px) {
+  #selectBrands .modal-header {
+    padding: 10px;
+  }
+
+  #selectBrands .modal-title {
+    font-size: 14px;
+  }
+
+  #selectBrands .main-container {
+    padding: 0;
+  }
+
+  #selectBrands .main-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  #selectBrands .radio-buttons {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #selectBrands a.custom-radio {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #selectBrands .radio-btn {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    padding: 5px 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon {
+    position: absolute;
+    width: 65px;
+    height: auto;
+  }
+
+  #selectBrands .radio-btn .brand-icon img {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  #selectBrands .radio-btn .brand-icon i {
+    line-height: 80px;
+    font-size: 60px;
+  }
+
+  #selectBrands .radio-btn .brand-icon h3 {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  #selectBrands .custom-radio input:checked+.radio-btn {
+    border: 2px solid #1581cd;
+  }
+
+  #selectBrands .searchbar {
+    font-size: 14px;
+    height: 44px;
+    border-radius: 24px;
+    margin: 0 auto;
+    max-width: 270px;
+    margin-bottom: 5px;
+  }
+
+  #selectBrands .searchbar-wrapper {
+    padding: 5px 8px 0 14px;
+  }
+
+  #selectBrands .searchbar-left {
+    font-size: 14px;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+
+  #selectBrands .search-icon-wrapper {
+    margin: auto;
+  }
+
+  #selectBrands .search-icon {
+    margin-top: 3px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+
+  #selectBrands .searchbar-icon {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+  }
+
+  #selectBrands .searchbar-input-spacer {
+    height: 34px;
+    font-size: 16px;
+  }
+
+  #selectBrands .searchbar-input {
+    margin: 0;
+    padding: 0;
+    margin-top: -30px;
+    height: 34px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #selectBrands .searchbar-right {
+    margin-top: -5px;
+  }
+
+  #selectBrands .searchbar-clear-icon {
+    margin-right: 12px;
+  }
+
+  #selectBrands .voice-search {
+    padding: 0 8px;
+    width: 2.3em;
+  }
+}
+
+@media (min-width: 1681px)and (max-width: 1920px) {
+  #selectBrands .modal-header {
+    padding: 10px;
+  }
+
+  #selectBrands .modal-title {
+    font-size: 14px;
+  }
+
+  #selectBrands .main-container {
+    padding: 0;
+  }
+
+  #selectBrands .main-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+  }
+
+  #selectBrands .radio-buttons {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #selectBrands a.custom-radio {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #selectBrands .radio-btn {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    padding: 5px 0;
   }
 
   #selectBrands .radio-btn .brand-icon {
@@ -1656,7 +2429,7 @@
     padding: 0;
     margin-top: -37px;
     height: 34px;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
   }
 

@@ -147,57 +147,62 @@ const CartPage: React.FC = () => {
                 strategy="beforeInteractive"
                 crossOrigin="anonymous"
             />
-            <section className="pageTop--MainContent mb-0">
+
+            <section className="pageMainContent">
                 <div className="container g-0">
                     <div className="row g-0">
-                        <div className="pageHead-Outer">
-                            <div className="outerHero">
-                                <div className="row g-0">
-                                    <nav aria-label="breadcrumb" className="g-0">
-                                        <ol className="breadcrumb">
-                                            <li className="breadcrumb-item">
-                                                <Link href="/">Home</Link>
-                                            </li>
-                                            <li className="breadcrumb-item active" aria-current="page">
-                                                My Cart
-                                            </li>
-                                        </ol>
-                                    </nav>
-                                    <div className="OuterBanner">
-                                        <div className="OuterBanner--left">
-                                            <div className="left_content">
-                                                <h2>InfyShield</h2>
-                                                <h1 className="display-3">Your Cart</h1>
-                                                <p>
-                                                    A complete mobile protection plan covering
-                                                    additional warranty, damage protection and assured
-                                                    buyback
-                                                </p>
-                                            </div>
-                                            <div className="left_action d-none">
-                                                <a href="#dwFormBox" className="ActionBtn">
-                                                    {" "}
-                                                    Get Now
-                                                </a>
-                                            </div>
-                                        </div>
-                                        {/* right */}
-                                        <div className="OuterBanner--right d-none">
-                                            <figure className="figure">
-                                                <img
-                                                    src="assets/img/heroBanner/iPhone-X 1.png"
-                                                    className="figure-img img-fluid"
-                                                    width={200}
-                                                    height={398}
-                                                    alt="banner right"
-                                                />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    {/* banner ends */}
+                    <div className="pageHead-Outer">
+                        <div className="outerHero">
+                        <div className="row g-0">
+                            {/* Breadcrumb start */}
+                            <nav aria-label="breadcrumb" className="g-0">
+                            <ol className="breadcrumb">
+                                <li className="breadcrumb-item">
+                                <Link href="/">Home</Link>
+                                </li>
+                                <li className="breadcrumb-item active" aria-current="page">
+                                My Cart
+                                </li>
+                            </ol>
+                            </nav>
+                            {/* Breadcrumb ends */}
+                            {/* banner start */}
+                            <div className="OuterBanner">
+                            {/* left */}
+                            <div className="OuterBanner--left">
+                                <div className="left_content">
+                                <h2>InfyShield</h2>
+                                <h1 className="display-3">Your Cart</h1>
+                                <p>
+                                A complete mobile protection plan covering
+                                additional warranty, damage protection and assured
+                                buyback
+                                </p>
+                                </div>
+                                <div className="left_action d-none">
+                                <a href="#dwFormBox" className="ActionBtn">
+                                    {" "}
+                                    Get Now
+                                </a>
                                 </div>
                             </div>
+                            {/* right */}
+                            <div className="OuterBanner--right d-none">
+                                <figure className="figure">
+                                <img
+                                    src="assets/img/heroBanner/iPhone-X 1.png"
+                                    className="figure-img img-fluid"
+                                    width={200}
+                                    height={398}
+                                    alt="banner right"
+                                />
+                                </figure>
+                            </div>
+                            </div>
+                            {/* banner ends */}
                         </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </section>
@@ -605,6 +610,7 @@ const CartPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+
         </Layout>
     )
 }

@@ -203,9 +203,6 @@ function ProductList() {
       }
       <ModalDeviceBrands showModal={showModal} toggleModal={toggleModal} productId={selectedProduct} />
 
-      {
-        /* Modal for Brands ends */
-      }
 
 
       <div className="OurDevices--Section">
@@ -225,7 +222,7 @@ function ProductList() {
               <div className="onheadfilter">
                 <div className="dw--form">
                   <form action="">
-                    <div className="row g-0 mb-3">
+                    <div className="row g-0 mb-3 justify-content-end">
                       <div className="col-6 col-sm-6 col-md-6 ">
                         <label htmlFor="sortBy" className="form-label">
                           Sort By
@@ -356,7 +353,7 @@ function ProductList() {
           </div>
         </div>
       </div>
-    </Layout>
+   </Layout>
   );
 }
 
