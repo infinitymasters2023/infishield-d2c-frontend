@@ -16,6 +16,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/test/index.js", "src/components/Payment/CheckoutButton.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/test/index.js", "src/components/Payment/CheckoutButton.jsx", "src/pages/api/paytm.ts"],
   "exclude": ["node_modules"]
 }

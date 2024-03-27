@@ -11,3 +11,10 @@ export const sendOtp = async (mobile: number): Promise<any> => {
         sentToOtp : 'Mobile'
     })
 };
+export const paymentsendOtp = async (mobile: number): Promise<any> => {
+    return await post('/paymentconfirm-email-txtmsg', {
+        mobile,
+        sentToOtp : 'Mobile'
+    })
+};
+

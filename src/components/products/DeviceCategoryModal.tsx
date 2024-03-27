@@ -112,26 +112,27 @@ const DeviceCategoryModal = ({ showModal, toggleModal }: { showModal: boolean, t
                             {/* <h2>Search your brand if not visible here</h2> */}
                             <div className="radio-buttons">
 
-                                    {categories.map((category) => {
-                                        return (
-                                        <Link href={`/productlist?subcategoryid=${category.subcategoryid}`} className="custom-radio">
-                                            <label key={category.id} >
-                                            <input type="radio" name="radio" />
-                                                    <span className="radio-btn">
-                                                        <div className="cate-icon">
+                                {categories.map((category) => {
+                                    return (
+                                        <Link key={category.subcategoryid} href={`/productlist?subcategoryid=${category.subcategoryid}`} className="custom-radio">
+                                            <label>
+                                                <input type="radio" name="radio" />
+                                                <span className="radio-btn">
+                                                    <div className="cate-icon">
                                                         <img
                                                             src={getCategoryImage(category.subcategoryid)}
                                                             width={48}
-                                                            height={48} 
+                                                            height={48}
                                                             alt={category.subcategoryname}
                                                         />
                                                         <h3>{category.subcategoryname}</h3>
-                                                        </div>
-                                                    </span>
+                                                    </div>
+                                                </span>
                                             </label>
                                         </Link>
-                                        );
-                                    })}
+                                    );
+                                })}
+
                             </div>
                         </div>
                     </div>

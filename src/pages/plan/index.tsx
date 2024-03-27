@@ -79,7 +79,9 @@ function Plan() {
       const iData = {
         ...requestPlan,
         ...selectedPlan,
-        brand: Array.isArray(brand) ? brand.join(', ') : brand
+        brand: Array.isArray(brand) ? brand.join(', ') : brand,
+        userEmail: email, // Include email
+        userMobile: mobile // Include mobile number
       }
       let parsedCartItems = []
       const cartItems = Cookies.get('cartitems');
@@ -96,9 +98,12 @@ function Plan() {
       sessionStorage.setItem("plan", selectedPlan.Plan);
       sessionStorage.setItem("price", selectedPlan.Price.toString());
       sessionStorage.setItem("brand", Array.isArray(brand) ? brand.join(', ') : brand);
+      sessionStorage.setItem("userEmail", email); // Store email in session storage
+      sessionStorage.setItem("userMobile", mobile); // Store mobile number in session storage
       router.push("/cart");
     }
   };
+  
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const validateForm = () => {

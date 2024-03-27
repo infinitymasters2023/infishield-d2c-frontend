@@ -122,7 +122,7 @@ const CartPage: React.FC = () => {
         Cookies.set('cartitems', JSON.stringify(updatedCartItems));
 
     };
-
+    const mobileNumber = sessionStorage.getItem("mobileNumber");
     const initializePayment = useMemo(() => {
         return async () => {
             const orderId = 'Order_' + new Date().getTime();
@@ -134,7 +134,7 @@ const CartPage: React.FC = () => {
                 mid: mid,
                 websiteName: 'InfinAWEB',
                 orderId: orderId,
-                callbackUrl: `${process.env.APP_URL}/api/paytm`,
+                callbackUrl: 'http://localhost:3000/api/paytm',
                 txnAmount: {
 
                     value: 1.00,
@@ -142,6 +142,7 @@ const CartPage: React.FC = () => {
                 },
                 userInfo: {
                     custId: '250',
+                    mobileNumber: mobileNumber,
                 },
             };
 
@@ -201,13 +202,14 @@ const CartPage: React.FC = () => {
     // InfinA73791511910258
     const makePaytmPayment = async () => {
         const mid = 'InfinA73791511910258'; // Define mid here or get it from somewhere else
-
+        const mobileNumber = sessionStorage.getItem("mobileNumber");
 
         const config = {
             root: '',
             data: {
                 orderId: payTMData.order,
                 token: payTMData.token,
+                mobileNumber:mobileNumber,
                 tokenType: 'TXN_TOKEN',
                 amount: totalSum,
                 mid: ''
@@ -312,11 +314,34 @@ const CartPage: React.FC = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
-    const handleProceedToPayment = () => {
-        if (isTermsAccepted && isManufacturerWarrantyAccepted) {
-            setShowPaymentButtons(true);
+    const resetCart = () => {
+        setCartItems([]);
+        Cookies.remove('cartitems');
+    };
+    const handlePaymentSuccess = (paymentResponse:any) => {
+        // Check the payment response for success status
+        if (paymentResponse && paymentResponse.STATUS === 'TXN_SUCCESS') {
+            // Payment was successful
+            resetCart();
+            console.log('Payment successful');
+            // Call any necessary functions or update UI accordingly
+        } else {
+            // Payment failed or status not as expected
+            console.log('Payment failed or status not as expected');
+            // Handle the failure case, show error message, etc.
         }
     };
+    
+    const handleProceedToPayment = (paymentResponse:any) => {
+        if (isTermsAccepted && isManufacturerWarrantyAccepted) {
+            setShowPaymentButtons(true);
+            // Call handlePaymentSuccess here if the conditions are met
+            // This assumes you have access to the payment response in this context
+            // You might need to adjust this based on your actual implementation
+            handlePaymentSuccess(paymentResponse);
+        }
+    };
+    
     return (
         <Layout>
             <Script

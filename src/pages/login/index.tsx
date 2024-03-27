@@ -43,13 +43,12 @@ const LoginPage: React.FC = () => {
     // };
     
 
-
-
     const handleSendOtp = async () => {
-        const mobileNumber = formik.values.mobile?.toString(); // Convert mobile number to string
-        if (mobileNumber && mobileNumber.length === 10) { // Check if mobile number is not null and is exactly 10 digits
+        const mobileNumber = formik.values.mobile ?? "";
+       
+        if (mobileNumber && mobileNumber.toString().length === 10) {
             try {
-                const response = await sendOtp(mobileNumber); // Pass mobileNumber as a string
+                const response = await sendOtp(mobileNumber); 
                 if (response && response.isSuccess && response.statusCode === 200) {
                     notify.success('OTP sent successfully!');
                     setShowOtpField(true); // Show OTP field upon successful OTP send
@@ -64,6 +63,31 @@ const LoginPage: React.FC = () => {
             notify.error('Please enter a valid 10-digit mobile number before sending OTP.');
         }
     };
+    
+    
+    
+    
+    
+
+    // const handleSendOtp = async () => {
+    //     const mobileNumber = formik.values.mobile?.toString(); // Convert mobile number to string
+    //     if (mobileNumber && mobileNumber.length === 10) { // Check if mobile number is not null and is exactly 10 digits
+    //         try {
+    //             const response = await sendOtp(mobileNumber); // Pass mobileNumber as a string
+    //             if (response && response.isSuccess && response.statusCode === 200) {
+    //                 notify.success('OTP sent successfully!');
+    //                 setShowOtpField(true); // Show OTP field upon successful OTP send
+    //             } else {
+    //                 notify.error('Failed to send OTP. Please try again.');
+    //             }
+    //         } catch (error) {
+    //             console.error(error);
+    //             notify.error('Error sending OTP. Please try again.');
+    //         }
+    //     } else {
+    //         notify.error('Please enter a valid 10-digit mobile number before sending OTP.');
+    //     }
+    // };
     
     const handleSubmit = async () => {
         const otp = formik.values.otp?.toString(); // Convert otp to string
