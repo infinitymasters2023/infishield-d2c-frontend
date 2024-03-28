@@ -50,7 +50,7 @@ function Plan() {
   const [mobileError, setMobileError] = useState('');
   const [isValidated, setIsValidated] = useState(false); // Track form validation
   const [priceError, setPriceError] = useState('');
-
+  const [showDamageProtection, setShowDamageProtection] = useState(false);
   const fetchServicePlanOptions = async (event: any) => {
     event.preventDefault();
     try {
@@ -80,8 +80,8 @@ function Plan() {
         ...requestPlan,
         ...selectedPlan,
         brand: Array.isArray(brand) ? brand.join(', ') : brand,
-        userEmail: email, // Include email
-        userMobile: mobile // Include mobile number
+        userEmail: email, 
+        userMobile: mobile 
       }
       let parsedCartItems = []
       const cartItems = Cookies.get('cartitems');
@@ -98,8 +98,8 @@ function Plan() {
       sessionStorage.setItem("plan", selectedPlan.Plan);
       sessionStorage.setItem("price", selectedPlan.Price.toString());
       sessionStorage.setItem("brand", Array.isArray(brand) ? brand.join(', ') : brand);
-      sessionStorage.setItem("userEmail", email); // Store email in session storage
-      sessionStorage.setItem("userMobile", mobile); // Store mobile number in session storage
+      sessionStorage.setItem("userEmail", email); 
+      sessionStorage.setItem("userMobile", mobile);
       router.push("/cart");
     }
   };
@@ -199,7 +199,23 @@ function Plan() {
       invoiceamount: transformedValue
     });
   };
-
+  const handleDateChange = (event: any) => {
+    const selectedDate = new Date(event.target.value);
+    const today = new Date();
+    setShowDamageProtection(selectedDate.toDateString() === today.toDateString());
+    console.log("Selected Date:", selectedDate.toDateString());
+    console.log("Today's Date:", today.toDateString());
+    console.log("showDamageProtection:", showDamageProtection);
+    setRequestPlan({
+      ...requestPlan,
+      invoicedate: event.target.value
+    });
+  
+    if (selectedDate.toDateString() === today.toDateString()) {
+      alert("Congratulations! You are eligible for accidental protection.");
+    }
+  };
+  
   return (
     <Layout>
       <>
@@ -299,20 +315,22 @@ function Plan() {
                   </div>
                   <div id="dwFormBox" className="dw--form">
                     <form action="" autoComplete="off">
-                      <div className="row g-0 mb-3">
-                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 p-0">
-                          <input type="radio" className="btn-check" name="claimType" id="extendedWarranty"
-                            autoComplete="off" checked />
-                          <label className="btn btn-outline-secondary  rounded-0 w-100"
-                            htmlFor="extendedWarranty">Extended Warranty</label>
-                        </div>
-                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 p-0">
-                          <input type="radio" className="btn-check" name="claimType" id="damageProtection"
-                            autoComplete="off" />
-                          <label className="btn btn-outline-secondary rounded-0 w-100 "
-                            htmlFor="damageProtection">Damage Protection</label>
-                        </div>
-                      </div>
+                  
+                    <div className="row g-0 mb-3">
+  {showDamageProtection ? (
+    <div className="col-6 col-sm-6 col-md-6 col-lg-6 p-0">
+      <input type="radio" className="btn-check" name="claimType" id="damageProtection" autoComplete="off" />
+      <label className="btn btn-outline-secondary rounded-0 w-100" htmlFor="damageProtection">Damage Protection</label>
+    </div>
+  ) : (
+    <div className="col-6 col-sm-6 col-md-6 col-lg-6 p-0">
+      <input type="radio" className="btn-check" name="claimType" id="extendedWarranty" autoComplete="off" checked />
+      <label className="btn btn-outline-secondary rounded-0 w-100" htmlFor="extendedWarranty">Extended Warranty</label>
+    </div>
+  )}
+</div>
+
+                        
                       <div className="row g-0 mb-3">
                         <div className="col-md-6">
                           <label htmlFor="inputDevicePrice" className="form-label">Device Price</label>
@@ -343,12 +361,13 @@ function Plan() {
                             className='form-control'
                             type="date"
                             max={getCurrentDate()} // Set the max attribute to the current date
-                            onChange={(event) => {
-                              setRequestPlan({
-                                ...requestPlan,
-                                invoicedate: event.target.value
-                              });
-                            }}
+                            // onChange={(event) => {
+                            //   setRequestPlan({
+                            //     ...requestPlan,
+                            //     invoicedate: event.target.value
+                            //   });
+                            // }}
+                            onChange={handleDateChange}
                           />
                           {/* {!isValidPurchaseDate() && <div className='text-danger'>Please select a valid purchase date.</div>} */}
                         </div>
